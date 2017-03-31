@@ -36,7 +36,7 @@ class VerificaSessao extends Conexao {
 		if(isset($_SESSION['logado'])){
 			unset($_SESSION['logado']);
 			session_destroy();
-			header("Location: ../index.php");
+			header("Location: ../login.php");
                 }
 	}
 }

@@ -7,7 +7,7 @@ class Produtos extends Conexao {
     private $laboratorio;
     protected $idcat;
     protected $idclie;
-    
+
     public function getId() {
         return $this->id;
     }
@@ -50,7 +50,7 @@ class Produtos extends Conexao {
 
     public function cadastrar() {
         $pdo = parent::getDataBase();
-        $cadastrar = $pdo->prepare("INSERT INTO tblProdutos  VALUES ('null', '$this->nome', '$this->laboratorio', '$this->idcat','$this->idclie')");        
+        $cadastrar = $pdo->prepare("INSERT INTO tblProdutos  VALUES ('null', '$this->nome', '$this->laboratorio', '$this->idcat','$this->idclie')");
         $cadastrar->execute();
         if ($cadastrar->rowCount() == 1) {
             echo("Cadastro realizado com sucesso");
@@ -84,9 +84,26 @@ class Produtos extends Conexao {
             }
         }
     }
-            
+
+    public function buscar($param) {
+        $pdo = parent::getDataBase();
+        $listar = $pdo->prepare("SELECT * FROM tblProdutos WHERE tblProdutosNome LIKE '%". $param . "%'");
+        $res = $listar->execute();
+        $num = $listar->rowCount($res);
+        if ($num > 0) {
+            for ($i = 0; $i < $num; $i++) {
+                $arr = $listar->fetch($res);
+                echo "<tr>";
+                echo '<td>' . $arr['tblProdutosNome'] . '</td>';
+                echo '<td>' . $arr['tblProdutosLaboratorio'] . '</td>';
+                echo '<td> - </td>';
+                echo "</tr>";
+            }
+        }
+    }
+
         public function atualizar(){
-        $pdo = parent::getDataBase();   
+        $pdo = parent::getDataBase();
         $atualizar = $pdo->prepare("UPDATE tblProdutos SET "
                 . "tblProdutosNome='$this->nome',"
                 . "tblProdutosLaboratorio='$this->laboratorio'"
@@ -97,9 +114,9 @@ class Produtos extends Conexao {
               die("Alterado com sucesso");
         }
         }
-        
+
         public function deletar(){
-          $pdo = parent::getDataBase();  
+          $pdo = parent::getDataBase();
           $excluir = $pdo->prepare("delete from tblProdutos where idtblProdutos"
                   . " = $this->id");
           $res = $excluir->execute();

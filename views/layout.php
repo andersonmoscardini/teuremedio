@@ -15,7 +15,7 @@ if (isset($_SESSION['logado'])) {
     <html lang="pt-br">
         <head>
             <meta charset="utf-8"/>
-            <title>Seja Bem-Vindo ao nosso Painel</title> 
+            <title>Seja Bem-Vindo ao nosso Painel</title>
             <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
             <!-- MetisMenu CSS -->
@@ -60,7 +60,7 @@ if (isset($_SESSION['logado'])) {
                                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i> 
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>
                                     <?php echo $_SESSION['administrador']; ?><br /></li>
                                 <li class="divider"></li>
                                 <li><a href="layout.php?logout=confirmar"><i class="fa fa-sign-out fa-fw"></i>Sair</a></li>
@@ -73,7 +73,7 @@ if (isset($_SESSION['logado'])) {
 
                          <?php
                 } else {
-                    header("Location: ../index.php?$erro= Você não tem acesso");
+                    header("Location: ../login.php?$erro= Você não tem acesso");
                 }
                 ?>
                 <div class="navbar-default sidebar" role="navigation">
@@ -153,7 +153,7 @@ if (isset($_SESSION['logado'])) {
 
                     <div class="col-lg-3 col-md-6">
 
-                    </div>               
+                    </div>
                 </div>
             </div>
         </div>
