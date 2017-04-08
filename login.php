@@ -13,7 +13,7 @@ if (isset($_POST['ok'])) {
     $l->setSenha($senha);
 
     if ($l->logar()) {
-        header("Location: views/layout.php");
+        header("Location: views/sistema.php");
     } else {
         $erro = "Usuário ou senha inválido";
     }
@@ -21,7 +21,7 @@ if (isset($_POST['ok'])) {
 
 //verifica a session
 if (isset($_SESSION['logado'])) {
-    header("Location: views/layout.php");
+    header("Location: views/sistema.php");
 } else {
     ?>
     <html lang="pt-br">
@@ -39,9 +39,9 @@ if (isset($_SESSION['logado'])) {
             <link href="views/dist/css/sb-admin-2.css" rel="stylesheet">
 
             <!-- Custom Fonts -->
-            <link href="views/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
+            <link href="views/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         </head>
-        <body>		
+        <body>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
@@ -63,11 +63,11 @@ if (isset($_SESSION['logado'])) {
                                     </fieldset>
                                 </form>
                                 <div style="text-align: center;color: red;">
-                                    <?php 
+                                    <?php
                                     echo isset($erro) ? $erro : '';}
                                     ?>
                                 </div>
-                                
+
                         </div>
                     </div>
                 </div>
