@@ -5,8 +5,8 @@ switch(@$_GET["op"]){
         include_once '../model/Conexao.php';
         include_once '../model/Clientes.php';
 
-        $lista = new Clientes;
-        $arr = $lista->listar();
+        $cliente = new Clientes;
+        $clientes = $cliente->listar();
 
         include_once('./clientes/listagem.php');
         break;

@@ -115,9 +115,24 @@ class Clientes extends Conexao {
         $pdo = parent::getDataBase();
         $listar = $pdo->prepare("SELECT * FROM tblClientes");
         $res = $listar->execute();
-        $arr = $listar->fetch($res);
+        $num = $listar->rowCount($res);
 
-        return $arr;
+        $clientes = [];
+        while($arr = $listar->fetch($res))
+        {
+            $cliente = new Clientes();
+            $cliente->setId($arr['idtblClientes']);
+            $cliente->setNome($arr['tblClientesNome']);
+            $cliente->setCnpj($arr['tblClientesCnpj']);
+            $cliente->setRazao($arr['tblClientesRazao']);
+            $cliente->setEndereco($arr['tblClientesEndereco']);
+            $cliente->setCep($arr['tblClientesCep']);
+            $cliente->setTelefone($arr['tblClientesTelefone']);
+            $cliente->setWeb($arr['tblClientesWeb']);
+            array_push($clientes, $cliente);
+        }
+
+        return $clientes;
     }
 
         public function atualizar(){
