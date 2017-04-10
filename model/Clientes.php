@@ -91,14 +91,14 @@ class Clientes extends Conexao {
     public function cadastrar() {
         $pdo = parent::getDataBase();
         $cadastrar = $pdo->prepare("INSERT INTO tblClientes  VALUES ('null', "
-                . "'$this->nome',"
-                . "'$this->cnpj',"
-                . "'$this->razao',"
-                . "'$this->endereco',"
-                . "'$this->complemento',"
-                . "'$this->cep',"
-                . "'$this->telefone',"
-                . "'$this->web')");
+        . "'$this->nome',"
+        . "'$this->cnpj',"
+        . "'$this->razao',"
+        . "'$this->endereco',"
+        . "'$this->complemento',"
+        . "'$this->cep',"
+        . "'$this->telefone',"
+        . "'$this->web')");
 
         $cadastrar->execute();
         if ($cadastrar->rowCount() == 1) {
@@ -132,47 +132,70 @@ class Clientes extends Conexao {
         return $clientes;
     }
 
-        public function atualizar(){
+    public function listarCliente($id) {
+        $pdo = parent::getDataBase();
+        $listar = $pdo->prepare("SELECT * FROM tblClientes WHERE idtblClientes = " . $id . "");
+        $res = $listar->execute();
+
+        $cliente = new Clientes();
+        while($arr = $listar->fetch($res))
+        {
+            $cliente->setId($arr['idtblClientes']);
+            $cliente->setNome($arr['tblClientesNome']);
+            $cliente->setCnpj($arr['tblClientesCnpj']);
+            $cliente->setRazao($arr['tblClientesRazao']);
+            $cliente->setEndereco($arr['tblClientesEndereco']);
+            $cliente->setCep($arr['tblClientesCep']);
+            $cliente->setTelefone($arr['tblClientesTelefone']);
+            $cliente->setWeb($arr['tblClientesWeb']);
+        }
+
+        return $cliente;
+    }
+
+    public function atualizar(){
         $pdo = parent::getDataBase();
         $atualizar = $pdo->prepare("UPDATE tblClientes SET "
-                . "tblClientesNome='$this->nome',"
-                . "tblClientesCnpj='$this->cnpj',"
-                . "tblClientesRazao='$this->razao',"
-                . "tblClientesEndereco='$this->endereco',"
-                . "tblClientesComplemento='$this->complemento',"
-                . "tblClientesCep='$this->cep',"
-                . "tblClientesTelefone='$this->telefone',"
-                . "tblClientesWeb='$this->web'"
-                . " WHERE idtblClientes=$this->id");
-	$atualizar->execute();
+        . "tblClientesNome='$this->nome',"
+        . "tblClientesCnpj='$this->cnpj',"
+        . "tblClientesRazao='$this->razao',"
+        . "tblClientesEndereco='$this->endereco',"
+        . "tblClientesComplemento='$this->complemento',"
+        . "tblClientesCep='$this->cep',"
+        . "tblClientesTelefone='$this->telefone',"
+        . "tblClientesWeb='$this->web'"
+        . " WHERE idtblClientes=$this->id");
+        $atualizar->execute();
         if ($atualizar->rowCount() == 1) {
-            header('Location:listagem.php');
-              die("Alterado com sucesso");
-        }
-        }
-
-        public function deletar(){
-          $pdo = parent::getDataBase();
-          $excluir = $pdo->prepare("delete from tblClientes where idtblClientes"
-                  . " = $this->id");
-          $res = $excluir->execute();
-          $num = $excluir->rowCount($res);
-          if($num > 0):
-              header('Location:listagem.php');
-             echo die("Excluído com sucesso");
-          endif;
-        }
-
-        public function listarclientes() {
-        $pdo = parent::getDataBase();
-        $listar = $pdo->prepare("SELECT * FROM tblClientes");
-        $res = $listar->execute();
-        $num = $listar->rowCount($res);
-        if ($num > 0) {
-            for ($i = 0; $i < $num; $i++) {
-                $arr = $listar->fetch($res);
-                     echo '<option value="'. $arr['idtblClientes'] .'">'. $arr['tblClientesNome'] .'</option>';
-            }
+            return true;
+        } else {
+            return false;
         }
     }
+
+    public function deletar(){
+        $pdo = parent::getDataBase();
+        $excluir = $pdo->prepare("delete from tblClientes where idtblClientes"
+        . " = $this->id");
+        $res = $excluir->execute();
+        $num = $excluir->rowCount($res);
+        if($num > 0):
+            header('Location:listagem.php');
+            echo die("Excluído com sucesso");
+        endif;
+    }
+
+    /*
+    public function listarclientes() {
+    $pdo = parent::getDataBase();
+    $listar = $pdo->prepare("SELECT * FROM tblClientes");
+    $res = $listar->execute();
+    $num = $listar->rowCount($res);
+    if ($num > 0) {
+    for ($i = 0; $i < $num; $i++) {
+    $arr = $listar->fetch($res);
+    echo '<option value="'. $arr['idtblClientes'] .'">'. $arr['tblClientesNome'] .'</option>';
+}
+}
+}*/
 }

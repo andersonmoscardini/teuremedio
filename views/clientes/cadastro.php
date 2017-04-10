@@ -43,7 +43,7 @@
                             <input class="form-control" placeholder="www.meu endereço.com.br" name="web">
                         </div>
                         <input type="submit" class="btn btn-success" name="cadastrar" value="Cadastrar">
-                        <a href="../layout.php" class="btn btn-danger">Cancelar</a>
+                        <a href="../views/sistema.php" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>

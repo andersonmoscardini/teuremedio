@@ -20,11 +20,11 @@
                                                 <th>Cep</th>
                                                 <th>Telefone</th>
                                                 <th>Web</th>
-                                                <th></th>
+                                                <th>Editar</th>
+                                                <th>Excluir</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <form role='form' method='get' action=atualizar.php>
                                             <?php foreach ($clientes as $cliente): ?>
                                                 <tr>
                                                     <td><?= $cliente->getNome() ?></td>
@@ -36,16 +36,22 @@
                                                     <td><?= $cliente->getTelefone() ?></td>
                                                     <td><?= $cliente->getWeb() ?></td>
                                                     <td style="text-align: center;">
-                                                        <a class=btn href="#">
-                                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                                        </a>
-                                                        <a class=btn href=excluir.php?id=<?= $cliente->getId() ?>>
-                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                        </a>
+                                                        <form method="post" action="sistema.php?op=clientesfrmedita">
+                                                            <input type="hidden" name="id" value="<?= $cliente->getId() ?>">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <form method="post" action="#">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
-                                            </form>
                                         </tbody>
                                     </table>
                                 </form>
