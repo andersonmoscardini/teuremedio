@@ -1,22 +1,11 @@
-<?php
-
-if (isset($_POST['cadastrar'])) {
-    $id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_MAGIC_QUOTES);
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_MAGIC_QUOTES);
-    $cnpj = filter_input(INPUT_POST, "cnpj", FILTER_SANITIZE_MAGIC_QUOTES);
-    $razao = filter_input(INPUT_POST, "razao", FILTER_SANITIZE_MAGIC_QUOTES);
-    $endereco = filter_input(INPUT_POST, "endereco", FILTER_SANITIZE_MAGIC_QUOTES);
-    $complemento = filter_input(INPUT_POST, "complemento", FILTER_SANITIZE_MAGIC_QUOTES);
-    $cep = filter_input(INPUT_POST, "cep", FILTER_SANITIZE_MAGIC_QUOTES);
-    $telefone = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_MAGIC_QUOTES);
-    $web = filter_input(INPUT_POST, "web", FILTER_SANITIZE_MAGIC_QUOTES);
-} ?>
-
 <div id="wrapper">
-
     <div id="page-wrapper">
-
         <div class="row">
+            <?php if(isset($cadastro) && $cadastro == true) { ?>
+                <p class="alert alert-success">Cadastro realizado com sucesso</p>
+            <?php } if(isset($cadastro) && $cadastro == false) { ?>
+                <p class="alert alert-danger">Houve um problema ao realizar o cadastro</p>
+            <?php } ?>
             <legend><h3 style="text-align: center;">Cadastro de Clientes</h3></legend>
             <div class="col-lg-6 col-md-6">
                 <form role="form" method="post" action="sistema.php?op=clientescadastro">
@@ -53,7 +42,6 @@ if (isset($_POST['cadastrar'])) {
                             <label>Pagina Web:</label>
                             <input class="form-control" placeholder="www.meu endereço.com.br" name="web">
                         </div>
-
                         <input type="submit" class="btn btn-success" name="cadastrar" value="Cadastrar">
                         <a href="../layout.php" class="btn btn-danger">Cancelar</a>
                     </div>

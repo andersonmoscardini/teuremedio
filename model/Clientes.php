@@ -102,11 +102,8 @@ class Clientes extends Conexao {
 
         $cadastrar->execute();
         if ($cadastrar->rowCount() == 1) {
-            echo("Cadastro realizado com sucesso");
-            header("Location: cadastro.php");
             return true;
         } else {
-            echo("Houve problemas no cadastro");
             return false;
         }
     }

@@ -21,14 +21,16 @@ switch(@$_GET["op"]){
 
         $cliente = new Clientes;
         $cliente->setNome($_POST['nome']);
-        $cliente->setCnpj($cnpj);
-        $cliente->setRazao($razao);
-        $cliente->setEndereco($endereco);
-        $cliente->setComplemento($complemento);
-        $cliente->setCep($cep);
-        $cliente->setTelefone($telefone);
-        $cliente->setWeb($web);
-        $cadastrar = $cliente->cadastrar();
+        $cliente->setCnpj($_POST['cnpj']);
+        $cliente->setRazao($_POST['razao']);
+        $cliente->setEndereco($_POST['endereco']);
+        $cliente->setComplemento($_POST['complemento']);
+        $cliente->setCep($_POST['cep']);
+        $cliente->setTelefone($_POST['telefone']);
+        $cliente->setWeb($_POST['web']);
+
+        $cadastro = $cliente->cadastrar();
+        include_once('./clientes/cadastro.php');
         break;
 }
 

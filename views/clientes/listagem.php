@@ -49,7 +49,7 @@
                                         </tbody>
                                     </table>
                                 </form>
-                                    <a href="../sistema.php" class="btn btn-danger" style="float: right">Voltar</a>
+                                    <a href="../views/sistema.php" class="btn btn-danger" style="float: right">Voltar</a>
                                 </div>
                                 <!-- /.table-responsive -->
                             </div>
