@@ -60,6 +60,17 @@ switch(@$_GET["op"]){
         $cadastro = $cliente->atualizar();
         include_once('./clientes/atualizar.php');
         break;
+
+    case 'clientesexclui':
+        include_once '../model/Conexao.php';
+        include_once '../model/Clientes.php';
+
+        $cliente = new Clientes;
+        $cadastro = $cliente->deletar($_POST["id"]);
+
+        $clientes = $cliente->listar();
+        include_once('./clientes/listagem.php');
+        break;
 }
 
 ?>

@@ -173,16 +173,16 @@ class Clientes extends Conexao {
         }
     }
 
-    public function deletar(){
+    public function deletar($id){
         $pdo = parent::getDataBase();
-        $excluir = $pdo->prepare("delete from tblClientes where idtblClientes"
-        . " = $this->id");
-        $res = $excluir->execute();
-        $num = $excluir->rowCount($res);
-        if($num > 0):
-            header('Location:listagem.php');
-            echo die("Excluído com sucesso");
-        endif;
+        $excluir = $pdo->prepare("DELETE from tblClientes WHERE idtblClientes = :id");
+        $excluir->bindParam(':id', $id);
+        $excluir->execute();
+        if ($excluir->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*

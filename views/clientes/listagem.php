@@ -2,6 +2,11 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
+                        <?php if(isset($cadastro) && $cadastro == true) { ?>
+                            <p class="alert alert-success">Cadastro removido com sucesso</p>
+                        <?php } if(isset($cadastro) && $cadastro == false) { ?>
+                            <p class="alert alert-danger">Houve um problema ao remover o cadastro</p>
+                        <?php } ?>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Lista de Clientes
@@ -44,8 +49,9 @@
                                                         </form>
                                                     </td>
                                                     <td style="text-align: center;">
-                                                        <form method="post" action="#">
-                                                            <button type="submit" class="btn btn-primary">
+                                                        <form method="post" action="sistema.php?op=clientesexclui">
+                                                            <input type="hidden" name="id" value="<?= $cliente->getId() ?>">
+                                                            <button type="submit" class="btn btn-danger">
                                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                             </button>
                                                         </form>
