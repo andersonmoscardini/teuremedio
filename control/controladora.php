@@ -71,6 +71,60 @@ switch(@$_GET["op"]){
         $clientes = $cliente->listar();
         include_once('./clientes/listagem.php');
         break;
-}
+    
+    case 'categoriaslistagem':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
 
-?>
+        $categoria = new Categorias;
+        $categorias = $categoria->listar();
+
+        include_once('./categorias/listagem.php');
+        break;
+    
+    case 'categoriasfrmcadastro':
+        include_once('./categorias/cadastro.php');
+        break;
+
+    case 'categoriascadastro':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+
+        $categoria = new Categorias;
+        $categoria->setCatNome($_POST['nome']);
+
+        $cadastro = $categoria->cadastrar();
+        include_once('./categorias/cadastro.php');
+        break;
+    
+    case 'categoriasfrmedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+
+        $categoria = new Categorias;
+        $categoria = $categoria->listarCategoria($_POST['id']);
+        include_once('./categorias/atualizar.php');
+        break;
+    
+    case 'categoriasedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+
+        $categoria = new Categorias;
+        $categoria->setIdCat($_POST['id']);
+        $categoria->setCatNome($_POST['nome']);
+
+        $cadastro = $categoria->atualizar();
+        include_once('./categorias/atualizar.php');
+        break;
+    
+    case 'categoriasexclui':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+
+        $categoria = new Categorias;
+        $cadastro = $categoria->deletar($_POST["id"]);
+        $categorias = $categoria->listar();
+        include_once('./categorias/listagem.php');
+        break;
+}

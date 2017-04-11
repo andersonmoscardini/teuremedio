@@ -56,10 +56,10 @@
                         <a href="#">Categorias <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../categorias/cadastro.php">Cadastro</a>
+                                <a href="sistema.php?op=categoriasfrmcadastro">Cadastro</a>
                             </li>
                             <li>
-                                <a href="../categorias/listagem.php">Lista</a>
+                                <a href="sistema.php?op=categoriaslistagem">Lista</a>
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>
@@ -78,10 +78,10 @@
                         <a href="#">Produtos <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../produtos/cadastro.php">Cadastro</a>
+                                <a href="sistema.php?op=produtosfrmcadastro">Cadastro</a>
                             </li>
                             <li>
-                                <a href="../produtos/listagem.php">Lista</a>
+                                <a href="sistema.php?op=produtoslistagem">Lista</a>
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>
@@ -89,10 +89,10 @@
                         <a href="#">Usuarios <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../usuarios/cadastro.php">Cadastro</a>
+                                <a href="sistema.php?op=usuariosfrmcadasto">Cadastro</a>
                             </li>
                             <li>
-                                <a href="../usuarios/listagem.php">Lista</a>
+                                <a href="sistema.php?op=usuarioslistagem">Lista</a>
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>

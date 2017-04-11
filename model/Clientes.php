@@ -112,7 +112,6 @@ class Clientes extends Conexao {
         $pdo = parent::getDataBase();
         $listar = $pdo->prepare("SELECT * FROM tblClientes");
         $res = $listar->execute();
-        $num = $listar->rowCount($res);
 
         $clientes = [];
         while($arr = $listar->fetch($res))
