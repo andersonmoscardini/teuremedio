@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/categorias/atualizar.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/model/Clientes.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/model/Categorias.php</file>
             <file>file:/E:/xampp/htdocs/teuremedio/control/controladora.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/clientes/listagem.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/clientes/atualizar.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/views/produtos/listagem.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/views/produtos/cadastro.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/model/Produtos.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/views/produtos/atualizar.php</file>
         </group>
     </open-files>
 </project-private>

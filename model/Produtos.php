@@ -1,12 +1,15 @@
 <?php
 
+include_once 'Categorias.php';
+include_once 'Clientes.php';
+
 class Produtos extends Conexao {
 
     private $id;
     private $nome;
     private $laboratorio;
-    protected $idcat;
-    protected $idclie;
+    private $categoria;
+    private $cliente;
 
     public function getId() {
         return $this->id;
@@ -20,12 +23,12 @@ class Produtos extends Conexao {
         return $this->laboratorio;
     }
 
-    public function getIdcat() {
-        return $this->idcat;
+    public function getCategoria() {
+        return $this->categoria;
     }
 
-    public function getIdclie() {
-        return $this->idclie;
+    public function getCliente() {
+        return $this->cliente;
     }
 
     public function setId($id) {
@@ -40,90 +43,115 @@ class Produtos extends Conexao {
         $this->laboratorio = $laboratorio;
     }
 
-    public function setIdcat($idcat) {
-        $this->idcat = $idcat;
+    public function setCategoria($categoria) {
+        $this->categoria = $categoria;
     }
 
-    public function setIdclie($idclie) {
-        $this->idclie = $idclie;
+    public function setCliente($cliente) {
+        $this->cliente = $cliente;
     }
 
     public function cadastrar() {
         $pdo = parent::getDataBase();
-        $cadastrar = $pdo->prepare("INSERT INTO tblProdutos  VALUES ('null', '$this->nome', '$this->laboratorio', '$this->idcat','$this->idclie')");
+        $cadastrar = $pdo->prepare("INSERT INTO tblProdutos  VALUES ('null', "
+                . "'$this->nome', "
+                . "'$this->laboratorio', "
+                . $this->categoria->getIdCat() . ", "
+                . $this->cliente->getId() . ")");
         $cadastrar->execute();
+
         if ($cadastrar->rowCount() == 1) {
-            echo("Cadastro realizado com sucesso");
-            header("Location: cadastro.php");
             return true;
         } else {
-            echo("Houve problemas no cadastro");
             return false;
         }
     }
 
     public function listar() {
         $pdo = parent::getDataBase();
-        $listar = $pdo->prepare("SELECT * FROM tblProdutos");
+        $listar = $pdo->prepare("SELECT * FROM tblProdutos "
+                . "INNER JOIN tblcategorias ON tblCategorias_idtblCategorias = idtblCategorias "
+                . "INNER JOIN tblclientes ON tblClientes_idtblClientes = idtblClientes");
         $res = $listar->execute();
-        $num = $listar->rowCount($res);
-        if ($num > 0) {
-            for ($i = 0; $i < $num; $i++) {
-                $arr = $listar->fetch($res);
-                echo "<form role='form' method='get' action=atualizar.php?>";
-                echo '<input name=id type=hidden value='. $arr['idtblProdutos'] .'>';
-                echo "<tr>";
-                echo '<td><input name=nome type=text value=' . $arr['tblProdutosNome'] .'></td>';
-                echo '<td><input name=laboratorio type=text value=' . $arr['tblProdutosLaboratorio'] .'></td>';
-                echo '<td>' . $arr['tblCategorias_idtblCategorias'] .'</td>';
-                echo '<td>' . $arr['tblClientes_idtblClientes'] .'</td>';
-                echo '<td><input name=alterar type=submit value=Alterar></td>';
-                echo '<td><a class=btn href=excluir.php?id='.$arr['idtblProdutos'].'>Excluir</a></td>';
-                echo "</tr>";
-                echo "</form>";
-            }
-        }
-    }
 
-    public function buscar($param) {
+        $produtos = [];
+        while ($arr = $listar->fetch($res)) {
+            //print_r($arr);
+            $produto = new Produtos();
+            $categoria = new Categorias();
+            $cliente = new Clientes();
+            $produto->setId($arr['idtblProdutos']);
+            $produto->setNome($arr['tblProdutosNome']);
+            $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
+            
+            $categoria->setIdCat($arr['idtblCategorias']);
+            $categoria->setCatNome($arr['tblCategoriasNome']);
+            $cliente->setId($arr['idtblClientes']);
+            $cliente->setNome($arr['tblClientesNome']);
+            
+            $produto->setCategoria($categoria);
+            $produto->setCliente($cliente);
+            
+            array_push($produtos, $produto);
+        }
+        return $produtos;
+    }
+    
+    public function listarProduto($id) {
         $pdo = parent::getDataBase();
-        $listar = $pdo->prepare("SELECT * FROM tblProdutos WHERE tblProdutosNome LIKE '%". $param . "%'");
+        $listar = $pdo->prepare("SELECT * FROM tblProdutos "
+                . "INNER JOIN tblcategorias ON tblCategorias_idtblCategorias = idtblCategorias "
+                . "INNER JOIN tblclientes ON tblClientes_idtblClientes = idtblClientes");
         $res = $listar->execute();
-        $num = $listar->rowCount($res);
-        if ($num > 0) {
-            for ($i = 0; $i < $num; $i++) {
-                $arr = $listar->fetch($res);
-                echo "<tr>";
-                echo '<td>' . $arr['tblProdutosNome'] . '</td>';
-                echo '<td>' . $arr['tblProdutosLaboratorio'] . '</td>';
-                echo '<td> - </td>';
-                echo "</tr>";
-            }
+
+        $produto = new Produtos();
+        while ($arr = $listar->fetch($res)) {
+            
+            $categoria = new Categorias();
+            $cliente = new Clientes();
+            $produto->setId($arr['idtblProdutos']);
+            $produto->setNome($arr['tblProdutosNome']);
+            $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
+            
+            $categoria->setIdCat($arr['idtblCategorias']);
+            $categoria->setCatNome($arr['tblCategoriasNome']);
+            $cliente->setId($arr['idtblClientes']);
+            $cliente->setNome($arr['tblClientesNome']);
+            
+            $produto->setCategoria($categoria);
+            $produto->setCliente($cliente);
         }
+        //var_dump($produto);
+        return $produto;
     }
 
-        public function atualizar(){
+    public function atualizar() {
         $pdo = parent::getDataBase();
         $atualizar = $pdo->prepare("UPDATE tblProdutos SET "
-                . "tblProdutosNome='$this->nome',"
-                . "tblProdutosLaboratorio='$this->laboratorio'"
-                . " WHERE idtblProdutos=$this->id");
-	$atualizar->execute();
+                . "tblProdutosNome='$this->nome', "
+                . "tblProdutosLaboratorio='$this->laboratorio', "
+                . "tblCategorias_idtblCategorias=" . $this->categoria->getIdCat() . ", "
+                . "tblClientes_idtblClientes=" . $this->cliente->getId() . " "
+                . "WHERE idtblProdutos=$this->id");
+        $atualizar->execute();
+        
         if ($atualizar->rowCount() == 1) {
-            header('Location:listagem.php');
-              die("Alterado com sucesso");
+            return true;
+        } else {
+            return false;
         }
-        }
+    }
 
-        public function deletar(){
-          $pdo = parent::getDataBase();
-          $excluir = $pdo->prepare("delete from tblProdutos where idtblProdutos"
-                  . " = $this->id");
-          $res = $excluir->execute();
-          $num = $excluir->rowCount($res);
-          if($num > 0):
-              header('Location:listagem.php');
-             echo die("Excluído com sucesso");
-          endif;
+    public function deletar($id) {     
+        $pdo = parent::getDataBase();
+        $excluir = $pdo->prepare("DELETE FROM tblProdutos WHERE idtblProdutos = :id");
+        $excluir->bindParam(':id', $id);
+        $excluir->execute();
+        if ($excluir->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
 }

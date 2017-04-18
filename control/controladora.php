@@ -127,4 +127,123 @@ switch(@$_GET["op"]){
         $categorias = $categoria->listar();
         include_once('./categorias/listagem.php');
         break;
+    
+    case 'produtoslistagem':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+
+        $produto = new Produtos;
+        $produtos = $produto->listar();
+
+        include_once('./produtos/listagem.php');
+        break;
+    
+    case 'produtosfrmcadastro':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+        
+        $categoria = new Categorias;
+        $categorias = $categoria->listar();
+
+        $cliente = new Clientes;
+        $clientes = $cliente->listar();
+        
+        $produto = new Produtos;
+        $produtos = $produto->listar();
+        
+        include_once('./produtos/cadastro.php');
+        break;
+    
+    case 'produtoscadastro':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+
+        $produto = new Produtos();
+        $categoria = new Categorias();
+        $cliente = new Clientes();
+
+        $produto->setNome($_POST['nome']);
+        $produto->setLaboratorio($_POST['laboratorio']);
+        
+        $categoria->setIdCat($_POST['categoria']);
+        $cliente->setId($_POST['cliente']);
+        
+        $produto->setCategoria($categoria);
+        $produto->setCliente($cliente);
+
+        $cadastro = $produto->cadastrar();
+        include_once('./produtos/cadastro.php');
+        break;
+    
+    case 'produtosfrmedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+        
+        $categoria = new Categorias;
+        $categorias = $categoria->listar();
+
+        $cliente = new Clientes;
+        $clientes = $cliente->listar();
+
+        $produto = new Produtos;
+        $produto = $produto->listarProduto($_POST['id']);
+        //get_object_vars($produto);
+        include_once('./produtos/atualizar.php');
+        break;
+    
+    case 'produtosedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+        
+        $produto = new Produtos();
+        $categoria = new Categorias();
+        $cliente = new Clientes();
+        
+        $categorias = $categoria->listar();
+        $clientes = $cliente->listar();
+
+        $produto->setId($_POST['id']);
+        $produto->setNome($_POST['nome']);
+        $produto->setLaboratorio($_POST['laboratorio']);
+        
+        $categoria->setIdCat($_POST['categoria']);
+        $cliente->setId($_POST['cliente']);
+        
+        $produto->setCategoria($categoria);
+        $produto->setCliente($cliente);
+        
+        $cadastro = $produto->atualizar();
+        
+        $produto = new Produtos();
+        $produto = $produto->listarProduto($_POST['id']);
+        include_once('./produtos/atualizar.php');
+        
+        break;
+    
+    case 'produtosexclui':
+        include_once '../model/Conexao.php';
+        include_once '../model/Categorias.php';
+        include_once '../model/Clientes.php';
+        include_once '../model/Produtos.php';
+        
+        $produto = new Produtos();
+        $cadastro = $produto->deletar($_POST["id"]);
+        
+        $produtos = $produto->listar();
+        include_once('./produtos/listagem.php');
+       break;
+    
+    default :
+        echo "Bem vindo!";
+        break;
 }
