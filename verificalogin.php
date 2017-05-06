@@ -14,7 +14,6 @@ $sessao->setSenha($senha);
 if ($sessao->logar()) {
     header('location:views/sistema.php');
 } else {
-    $sessao->deslogar();
-    header('location:login.php');
+    echo "<script>location.href='./login.php';</script>";
 }
 ?>
