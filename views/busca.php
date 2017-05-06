@@ -24,6 +24,7 @@ include_once('../control/controladora.php');
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
+                                <?php if($produtos){ ?>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover table-condensed">
                                         <thead>
@@ -48,6 +49,11 @@ include_once('../control/controladora.php');
                                     <a href="../" class="btn btn-danger" style="float: right">Voltar</a>
                                 </div>
                                 <!-- /.table-responsive -->
+                                <?php } else { ?>
+                                    <p class="alert alert-success">Nenhum produto encontrado :(</p>
+                                    
+                                    <a href="../" class="btn btn-danger" style="float: right">Voltar</a>
+                                <?php } ?>
                             </div>
                             <!-- /.panel-body -->
                         </div>
