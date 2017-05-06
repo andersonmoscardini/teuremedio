@@ -251,6 +251,6 @@ switch(@$_GET["op"]){
         break;
     
     default :
-        echo "Bem vindo!";
+        include_once('./template/welcome.php');
         break;
 }
