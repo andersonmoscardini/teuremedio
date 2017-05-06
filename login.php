@@ -1,30 +1,4 @@
-<?php
-session_start();
-require_once "classes/Conexao.php";
-require_once "./control/VerificaSessao.php";
-
-if (isset($_POST['ok'])) {
-
-    $login = filter_input(INPUT_POST, "login", FILTER_SANITIZE_MAGIC_QUOTES);
-    $senha = filter_input(INPUT_POST, "senha", FILTER_SANITIZE_MAGIC_QUOTES);
-
-    $l = new VerificaSessao;
-    $l->setLogin($login);
-    $l->setSenha($senha);
-
-    if ($l->logar()) {
-        header("Location: views/sistema.php");
-    } else {
-        $erro = "Usuário ou senha inválido";
-    }
-}
-
-//verifica a session
-if (isset($_SESSION['logado'])) {
-    header("Location: views/sistema.php");
-} else {
-    ?>
-    <html lang="pt-br">
+<html lang="pt-br">
         <head>
             <meta charset="utf-8"/>
             <title>Acesso ao Painel de Controle</title>
@@ -50,7 +24,7 @@ if (isset($_SESSION['logado'])) {
                                 <h3 class="panel-title" style="text-align: center;">Painel de Acesso</h3>
                             </div>
                             <div class="panel-body">
-                                <form role="form" method="post">
+                                <form role="form" method="post" action="verificalogin.php">
                                     <fieldset>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Login" name="login" type="text" required>
@@ -64,7 +38,7 @@ if (isset($_SESSION['logado'])) {
                                 </form>
                                 <div style="text-align: center;color: red;">
                                     <?php
-                                    echo isset($erro) ? $erro : '';}
+                                    echo isset($erro) ? $erro : '';
                                     ?>
                                 </div>
 

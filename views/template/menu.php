@@ -25,9 +25,9 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                    <?php echo $_SESSION['administrador']; ?><br /></li>
+                    <?php echo ucfirst($logado) ?><br /></li>
                 <li class="divider"></li>
-                <li><a href="../layout.php?logout=confirmar"><i class="fa fa-sign-out fa-fw"></i>Sair</a></li>
+                <li><a href="sistema.php?op=logout"><i class="fa fa-sign-out fa-fw"></i>Sair</a></li>
             </ul>
             <!-- /.dropdown-user -->
         </li>

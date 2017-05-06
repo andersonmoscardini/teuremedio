@@ -242,6 +242,13 @@ switch(@$_GET["op"]){
         $produtos = $produto->listar();
         include_once('./produtos/listagem.php');
        break;
+   
+    case 'logout':
+        include_once '../model/Conexao.php';
+        include_once '../model/Sessao.php';
+        
+        Sessao::deslogar();
+        break;
     
     default :
         echo "Bem vindo!";
