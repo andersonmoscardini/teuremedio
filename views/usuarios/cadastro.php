@@ -6,7 +6,7 @@
             <?php } if (isset($cadastro) && $cadastro == false) { ?>
                 <p class="alert alert-danger">Houve um problema ao realizar o cadastro</p>
             <?php } ?>
-            <legend><h3 style="text-align: center;">Cadastro de Categorias</h3></legend>
+            <legend><h3 style="text-align: center;">Cadastro de Usuários</h3></legend>
             <div class="col-lg-6 col-md-6">
                 <form role="form" method="post" action="sistema.php?op=usuarioscadastro">
                     <div class="form-group">
