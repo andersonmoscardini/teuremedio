@@ -4,7 +4,7 @@ include_once './model/Conexao.php';
 include_once './model/Sessao.php';
 
 $login = $_POST['login'];
-$senha = $_POST['senha'];
+$senha = md5($_POST['senha']);
 
 $sessao = new Sessao();
 $sessao->setLogin($login);

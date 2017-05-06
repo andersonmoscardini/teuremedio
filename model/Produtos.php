@@ -153,5 +153,23 @@ class Produtos extends Conexao {
             return false;
         }
     }
+    
+    public function buscarProduto($nome) {
+        $pdo = parent::getDataBase();
+        $listar = $pdo->prepare("SELECT * FROM tblProdutos WHERE tblProdutosNome LIKE '%". $nome . "%'");
+        $res = $listar->execute();
+
+        $produtos = [];
+        $produto = new Produtos();
+        while ($arr = $listar->fetch($res)) {
+            $produto->setId($arr['idtblProdutos']);
+            $produto->setNome($arr['tblProdutosNome']);
+            $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
+            
+            array_push($produtos, $produto);
+        }
+        //var_dump($produtos);
+        return $produtos;
+    }
 
 }

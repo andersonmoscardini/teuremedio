@@ -310,6 +310,15 @@ switch(@$_GET["op"]){
         Sessao::deslogar();
         break;
     
+    case 'buscaproduto':
+        include_once '../model/Conexao.php';
+        include_once '../model/Produtos.php';
+        
+        $produto = new Produtos();
+        $produtos = $produto->buscarProduto($_POST['nomeremedio']);
+        
+        break;
+    
     default :
         include_once('./template/welcome.php');
         break;

@@ -14,7 +14,7 @@ session_start();
 <body>
 <div class="container">
     <h3 class="" style="text-align: center;">Encontre o seu remédio pelo melhor preço</h3>
-    <form class="form-horizontal" action="views/produtos/busca.php" method="post">
+    <form class="form-horizontal" action="views/busca.php?op=buscaproduto" method="post">
         <div class="form-group">
                 <div class="col-sm-4 col-md-4 col-md-offset-3">
                     <input type="text" placeholder="Nome remédio" class="form-control" name="nomeremedio" id="nomeremedio">
