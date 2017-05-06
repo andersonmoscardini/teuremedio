@@ -1,25 +1,33 @@
-<?php
-session_start();
-require_once '../../classes/Conexao.php';
-require_once '../../model/Usuarios.php';
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $nome = $_GET['nome'];
-    $email = $_GET['email'];
-    $senha = $_GET['senha'];
-
-    $atualizar = new Usuarios;
-    $atualizar->setId($id);
-    $atualizar->setNome($nome);
-    $atualizar->setEmail($email);
-    $atualizar->setSenha($senha);
-    $atualiza = $atualizar->atualizar();
-}
-//verifica a session
-if (isset($_SESSION['logado'])) {
-    require_once '../../control/VerificaSessao.php';
-} else {
-    header("Location: ../../index.php?$erro= Você não tem acesso");
-}
-?>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <?php if (isset($cadastro) && $cadastro == true) { ?>
+                <p class="alert alert-success">Cadastro realizado com sucesso</p>
+            <?php } if (isset($cadastro) && $cadastro == false) { ?>
+                <p class="alert alert-danger">Houve um problema ao realizar o cadastro</p>
+            <?php } ?>
+            <legend><h3 style="text-align: center;">Cadastro de Categorias</h3></legend>
+            <div class="col-lg-6 col-md-6">
+                <form role="form" method="post" action="sistema.php?op=usuariosedita">
+                    <input type="hidden" name="id" value="<?= $usuario->getId() ?>">
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input class="form-control" placeholder="Digite o nome" name="nome" value="<?= $usuario->getNome() ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail:</label>
+                        <input class="form-control" placeholder="Digite o e-mail" name="email" value="<?= $usuario->getEmail() ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha:</label>
+                        <input class="form-control" placeholder="Digite a senha" name="senha" >
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" name="cadastrar" value="Cadastrar">
+                        <a href="../views/sistema.php" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -243,6 +243,66 @@ switch(@$_GET["op"]){
         include_once('./produtos/listagem.php');
        break;
    
+    case 'usuariosfrmcadastro':
+        include_once('./usuarios/cadastro.php');
+        break;
+    
+    case 'usuarioscadastro':
+        include_once '../model/Conexao.php';
+        include_once '../model/Usuarios.php';
+
+        $usuario = new Usuarios;
+        $usuario->setNome($_POST['nome']);
+        $usuario->setEmail($_POST['email']);
+        $usuario->setSenha($_POST['senha']);
+
+        $cadastro = $usuario->cadastrar();
+        include_once('./usuarios/cadastro.php');
+        break;
+    
+    case 'usuarioslistagem':
+        include_once '../model/Conexao.php';
+        include_once '../model/Usuarios.php';
+
+        $usuario = new Usuarios;
+        $usuarios = $usuario->listar();
+
+        include_once('./usuarios/listagem.php');
+        break;
+    
+    case 'usuariosexclui':
+        include_once '../model/Conexao.php';
+        include_once '../model/Usuarios.php';
+
+        $usuario = new Usuarios;
+        $cadastro = $usuario->deletar($_POST["id"]);
+        $usuarios = $usuario->listar();
+        include_once('./usuarios/listagem.php');
+        break;
+    
+    case 'usuariosfrmedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Usuarios.php';
+
+        $usuario = new Usuarios;
+        $usuario = $usuario->listarUsuario($_POST['id']);
+        include_once('./usuarios/atualizar.php');
+        break;
+    
+    case 'usuariosedita':
+        include_once '../model/Conexao.php';
+        include_once '../model/Usuarios.php';
+
+        $usuario = new Usuarios;
+        $usuario->setId($_POST['id']);
+        $usuario->setNome($_POST['nome']);
+        $usuario->setEmail($_POST['email']);
+        $usuario->setSenha($_POST['senha']);
+
+        $cadastro = $usuario->atualizar();
+        include_once('./usuarios/atualizar.php');
+        break;
+   
     case 'logout':
         include_once '../model/Conexao.php';
         include_once '../model/Sessao.php';

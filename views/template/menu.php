@@ -89,7 +89,7 @@
                         <a href="#">Usuarios <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="sistema.php?op=usuariosfrmcadasto">Cadastro</a>
+                                <a href="sistema.php?op=usuariosfrmcadastro">Cadastro</a>
                             </li>
                             <li>
                                 <a href="sistema.php?op=usuarioslistagem">Lista</a>
