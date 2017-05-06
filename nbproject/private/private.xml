@@ -3,15 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/template/menu.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/model/Categorias.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/verificalogin.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/sistema.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/control/controladora.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/login.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/template/header.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/views/clientes/listagem.php</file>
-            <file>file:/E:/xampp/htdocs/teuremedio/model/Sessao.php</file>
+            <file>file:/E:/xampp/htdocs/teuremedio/views/usuarios/cadastro.php</file>
         </group>
     </open-files>
 </project-private>
