@@ -31,6 +31,7 @@ include_once('../control/controladora.php');
                                             <tr>
                                                 <th>Nome</th>
                                                 <th>Laboratório</th>
+                                                <th>Cliente</th>
                                                 <th>Acesso</th>
                                             </tr>
                                         </thead>
@@ -39,8 +40,9 @@ include_once('../control/controladora.php');
                                                 <tr>
                                                     <td><?= $produto->getNome() ?></td>
                                                     <td><?= $produto->getLaboratorio() ?></td>
+                                                    <td><?= $produto->getCliente()->getNome() ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="#" target="_blank" class="btn btn-success">Ver oferta</a>
+                                                        <a href="http://<?= $produto->getCliente()->getWeb() .'/'. strtolower($produto->getNome()) ?>" target="_blank" class="btn btn-success">Ver oferta</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -51,7 +53,7 @@ include_once('../control/controladora.php');
                                 <!-- /.table-responsive -->
                                 <?php } else { ?>
                                     <p class="alert alert-success">Nenhum produto encontrado :(</p>
-                                    
+
                                     <a href="../" class="btn btn-danger" style="float: right">Voltar</a>
                                 <?php } ?>
                             </div>

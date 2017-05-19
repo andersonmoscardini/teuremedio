@@ -83,20 +83,20 @@ class Produtos extends Conexao {
             $produto->setId($arr['idtblProdutos']);
             $produto->setNome($arr['tblProdutosNome']);
             $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
-            
+
             $categoria->setIdCat($arr['idtblCategorias']);
             $categoria->setCatNome($arr['tblCategoriasNome']);
             $cliente->setId($arr['idtblClientes']);
             $cliente->setNome($arr['tblClientesNome']);
-            
+
             $produto->setCategoria($categoria);
             $produto->setCliente($cliente);
-            
+
             array_push($produtos, $produto);
         }
         return $produtos;
     }
-    
+
     public function listarProduto($id) {
         $pdo = parent::getDataBase();
         $listar = $pdo->prepare("SELECT * FROM tblProdutos "
@@ -106,18 +106,18 @@ class Produtos extends Conexao {
 
         $produto = new Produtos();
         while ($arr = $listar->fetch($res)) {
-            
+
             $categoria = new Categorias();
             $cliente = new Clientes();
             $produto->setId($arr['idtblProdutos']);
             $produto->setNome($arr['tblProdutosNome']);
             $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
-            
+
             $categoria->setIdCat($arr['idtblCategorias']);
             $categoria->setCatNome($arr['tblCategoriasNome']);
             $cliente->setId($arr['idtblClientes']);
             $cliente->setNome($arr['tblClientesNome']);
-            
+
             $produto->setCategoria($categoria);
             $produto->setCliente($cliente);
         }
@@ -134,7 +134,7 @@ class Produtos extends Conexao {
                 . "tblClientes_idtblClientes=" . $this->cliente->getId() . " "
                 . "WHERE idtblProdutos=$this->id");
         $atualizar->execute();
-        
+
         if ($atualizar->rowCount() == 1) {
             return true;
         } else {
@@ -142,7 +142,7 @@ class Produtos extends Conexao {
         }
     }
 
-    public function deletar($id) {     
+    public function deletar($id) {
         $pdo = parent::getDataBase();
         $excluir = $pdo->prepare("DELETE FROM tblProdutos WHERE idtblProdutos = :id");
         $excluir->bindParam(':id', $id);
@@ -153,19 +153,27 @@ class Produtos extends Conexao {
             return false;
         }
     }
-    
+
     public function buscarProduto($nome) {
         $pdo = parent::getDataBase();
-        $listar = $pdo->prepare("SELECT * FROM tblProdutos WHERE tblProdutosNome LIKE '%". $nome . "%'");
+        $listar = $pdo->prepare("SELECT * FROM tblProdutos " .
+        "INNER JOIN tblclientes ON tblClientes_idtblClientes = idtblClientes " .
+        "WHERE tblProdutosNome LIKE '%". $nome . "%'");
         $res = $listar->execute();
 
         $produtos = [];
         $produto = new Produtos();
+        $cliente = new Clientes();
         while ($arr = $listar->fetch($res)) {
             $produto->setId($arr['idtblProdutos']);
             $produto->setNome($arr['tblProdutosNome']);
             $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
-            
+
+            $cliente->setNome($arr['tblClientesNome']);
+            $cliente->setWeb($arr['tblClientesWeb']);
+
+            $produto->setCliente($cliente);
+
             array_push($produtos, $produto);
         }
         //var_dump($produtos);
