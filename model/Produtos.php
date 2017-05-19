@@ -170,6 +170,7 @@ class Produtos extends Conexao {
             $produto->setLaboratorio($arr['tblProdutosLaboratorio']);
 
             $cliente->setNome($arr['tblClientesNome']);
+            $cliente->setWeb($arr['tblClientesWeb']);
 
             $produto->setCliente($cliente);
 

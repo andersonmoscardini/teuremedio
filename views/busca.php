@@ -42,7 +42,7 @@ include_once('../control/controladora.php');
                                                     <td><?= $produto->getLaboratorio() ?></td>
                                                     <td><?= $produto->getCliente()->getNome() ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="#" target="_blank" class="btn btn-success">Ver oferta</a>
+                                                        <a href="http://<?= $produto->getCliente()->getWeb() .'/'. strtolower($produto->getNome()) ?>" target="_blank" class="btn btn-success">Ver oferta</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
